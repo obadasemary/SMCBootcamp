@@ -11,7 +11,7 @@ import SwiftUI
 struct SMCBootcampApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DownloadmageAsync()
         }
     }
 }

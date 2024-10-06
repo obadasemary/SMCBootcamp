@@ -35,4 +35,11 @@ class DownloadmageAsyncViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+    
+    func fetchImageWtihAsync() async {
+        let image = try? await loader.downloadWithAsync()
+        await MainActor.run {        
+            self.image = image
+        }
+    }
 }

@@ -21,10 +21,15 @@ struct DownloadmageAsync: View {
             }
         }
         .onTapGesture {
-            viewModel.fetchImageWtihCombine()
+            Task {
+                await viewModel.fetchImageWtihAsync()
+            }
+        }
+        .onLongPressGesture {
+            viewModel.fetchImage()
         }
         .onAppear {
-            viewModel.fetchImage()
+            viewModel.fetchImageWtihCombine()
         }
     }
 }

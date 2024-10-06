@@ -52,4 +52,17 @@ class DownloadmageAsyncImageLoader {
             .mapError({ $0 })
             .eraseToAnyPublisher()
     }
+    
+    func downloadWithAsync() async throws -> UIImage? {
+        guard let url = prepareUrl() else {
+            return nil
+        }
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            return handleResponse(data: data, response: response)
+        } catch {
+            throw error
+        }
+    }
 }

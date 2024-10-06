@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct DownloadmageAsync: View {
+    @StateObject private var viewModel = DownloadmageAsyncViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            if let image  = viewModel.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+            }
+        }
+        .onTapGesture {
+            viewModel.fetchImageWtihCombine()
+        }
+        .onAppear {
+            viewModel.fetchImage()
+        }
     }
 }
 

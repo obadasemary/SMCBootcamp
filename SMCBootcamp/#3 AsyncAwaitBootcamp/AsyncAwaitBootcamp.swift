@@ -7,9 +7,28 @@
 
 import SwiftUI
 
+class AsyncAwaitBootcampViewModel: ObservableObject {
+    
+    @Published var dataArray: [String] = []
+    
+    func addTitle1() {
+        dataArray.append("Title1: \(Thread.current)")
+    }
+}
+
 struct AsyncAwaitBootcamp: View {
+    
+    @StateObject private var viewModel = AsyncAwaitBootcampViewModel()
+    
     var body: some View {
-        Text("Hello, World!")
+        List {
+            ForEach(viewModel.dataArray, id: \.self) { data in
+                Text(data)
+            }
+        }
+        .onAppear {
+            viewModel.addTitle1()
+        }
     }
 }
 

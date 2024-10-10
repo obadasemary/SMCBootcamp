@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-class AsyncAwaitBootcampViewModel: ObservableObject {
-    
-    @Published var dataArray: [String] = []
-    
-    func addTitle1() {
-        dataArray.append("Title1: \(Thread.current)")
-    }
-}
-
 struct AsyncAwaitBootcamp: View {
     
     @StateObject private var viewModel = AsyncAwaitBootcampViewModel()
@@ -27,7 +18,8 @@ struct AsyncAwaitBootcamp: View {
             }
         }
         .onAppear {
-            viewModel.addTitle1()
+            viewModel.addTitleMainAsyncAfter()
+            viewModel.addTitleGlobalAsyncAfter()
         }
     }
 }

@@ -29,4 +29,33 @@ class AsyncAwaitBootcampViewModel: ObservableObject {
             }
         }
     }
+    
+    func addAuthor() async {
+        let author1 = "Author1 \(Thread.current)"
+        self.dataArray.append(author1)
+        
+        try? await Task.sleep(nanoseconds: 2_000_000_000)
+        
+        let author2 = "Author2 \(Thread.current)"
+        await MainActor.run {
+            self.dataArray.append(author2)
+            
+            let author3 = "Author3 \(Thread.current)"
+            self.dataArray.append(author3)
+        }
+        
+        await addSomething()
+    }
+    
+    func addSomething() async {
+        try? await Task.sleep(nanoseconds: 2_000_000_000)
+        
+        let something1 = "Something1 \(Thread.current)"
+        await MainActor.run {
+            self.dataArray.append(something1)
+            
+            let something2 = "Something2 \(Thread.current)"
+            self.dataArray.append(something2)
+        }
+    }
 }

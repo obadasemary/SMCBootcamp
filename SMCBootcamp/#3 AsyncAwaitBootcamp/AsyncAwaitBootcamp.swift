@@ -18,8 +18,11 @@ struct AsyncAwaitBootcamp: View {
             }
         }
         .onAppear {
-            viewModel.addTitleMainAsyncAfter()
-            viewModel.addTitleGlobalAsyncAfter()
+//            viewModel.addTitleGlobalAsyncAfter()
+//            viewModel.addTitleMainAsyncAfter()
+            Task {
+                await viewModel.addAuthor()
+            }
         }
     }
 }
